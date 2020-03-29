@@ -10,19 +10,7 @@ const WorkoutSchema = new Schema({
     default: Date.now,
     unique: true
   },
-  exercises: [],
-  resistance: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: `Resistance`
-    }
-  ],
-  cardio: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: `Cardio`
-    }
-  ]
+  exercises: []
 }, opts);
 
 WorkoutSchema.virtual(`totalDuration`).get(function() {
