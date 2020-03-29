@@ -10,10 +10,17 @@ const WorkoutSchema = new Schema({
     default: Date.now,
     unique: true
   },
-  exercises: [
+  exercises: [],
+  resistance: [
     {
       type: Schema.Types.ObjectId,
-      ref: `Exercises`
+      ref: `Resistance`
+    }
+  ],
+  cardio: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: `Cardio`
     }
   ]
 }, opts);
