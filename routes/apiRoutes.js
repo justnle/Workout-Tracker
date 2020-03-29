@@ -5,10 +5,7 @@ const db = require(`../models/Index`);
 module.exports = app => {
   app.get(`/api/workouts`, (req, res) => {
     db.Workout.find({})
-      .populate(`cardio`)
-      .populate(`resistance`)
       .then(dbWorkout => {
-        console.log(dbWorkout);
         res.json(dbWorkout);
       }).catch(err => {
         res.json(err);
@@ -16,8 +13,9 @@ module.exports = app => {
   });
 
   app.get(`/api/workouts/range`, (req, res) => {
-    db.Workout.find({}).sort({ day: -1 }).then(dbWorkout => {
-      res.json(dbWorkout.slice(0, 10));
+    db.Workout.find({}).sort({ _id: -1 }).then(dbWorkout => {
+      const maxWorkouts = 10;
+      res.json(dbWorkout.slice(0, maxWorkouts));
     }).catch(err => {
       res.json(err);
     });
