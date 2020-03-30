@@ -13,9 +13,12 @@ module.exports = app => {
   });
 
   app.get(`/api/workouts/range`, (req, res) => {
-    db.Workout.find({}).sort({ _id: -1 }).then(dbWorkout => {
+    db.Workout.find({}).then(dbWorkout => {
       const maxWorkouts = 10;
-      res.json(dbWorkout.slice(0, maxWorkouts));
+      const lastWorkouts = dbWorkout.length - maxWorkouts;
+      const numberWorkouts = dbWorkout.length;
+
+      res.json(dbWorkout.slice(lastWorkouts, numberWorkouts));
     }).catch(err => {
       res.json(err);
     });
