@@ -4,10 +4,9 @@ const db = require(`../models/Index`);
 
 module.exports = app => {
   app.get(`/api/workouts`, (req, res) => {
-    db.Workout.find({}).sort({ _id: -1})
+    db.Workout.find({})
       .then(dbWorkout => {
-        const maxWorkouts = 10;
-        res.json(dbWorkout.slice(0, maxWorkouts));
+        res.json(dbWorkout);
       }).catch(err => {
         res.json(err);
       });
